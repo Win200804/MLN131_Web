@@ -2,11 +2,14 @@
 // 2 games: Điền từ còn thiếu, Sắp xếp Timeline
 
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { HiPuzzle, HiCheck, HiX, HiRefresh, HiLightBulb, HiClock, HiArrowRight, HiStar } from 'react-icons/hi'
+import { HiPuzzle, HiCheck, HiX, HiRefresh, HiLightBulb, HiClock, HiArrowRight, HiStar, HiLockClosed } from 'react-icons/hi'
 import { saveGameHistory } from '../services/storageService'
+import { useAuth } from '../context/AuthContext'
 
 const GamePage = () => {
+  const { user, isAuthenticated, loading } = useAuth()
   const [activeGame, setActiveGame] = useState(null)
 
   const games = [
@@ -27,6 +30,62 @@ const GamePage = () => {
       difficulty: 'Dễ - Trung bình'
     }
   ]
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Đang tải...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Chưa đăng nhập - yêu cầu login (giống QuizPage)
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-500 flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="max-w-md w-full"
+        >
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <HiPuzzle className="w-10 h-10 text-accent-gold" />
+            </div>
+            <h1 className="font-heading text-3xl font-bold text-white mb-2">Mini Games</h1>
+            <p className="text-white/70">Đăng nhập để tham gia trò chơi</p>
+          </div>
+
+          {/* Card */}
+          <div className="bg-white rounded-2xl shadow-2xl p-8 space-y-6">
+            <div className="text-center">
+              <h2 className="font-heading text-xl font-bold text-gray-900 mb-2">Vui lòng đăng nhập</h2>
+              <p className="text-gray-500 text-sm">Để chơi Mini Games, bạn cần đăng nhập trước</p>
+            </div>
+
+            <Link
+              to="/login"
+              state={{ from: { pathname: '/games' } }}
+              className="w-full btn-primary flex items-center justify-center space-x-3 py-4"
+            >
+              <HiLockClosed className="w-6 h-6" />
+              <span className="font-bold">Đăng nhập với Google</span>
+            </Link>
+
+            <p className="text-center text-xs text-gray-400">
+              Học qua trò chơi - Vừa vui vừa nhớ lâu!
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

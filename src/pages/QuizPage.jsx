@@ -459,7 +459,7 @@ const LobbyView = ({ playerName, setPlayerName, joinCode, setJoinCode, error, on
           {/* Room Code */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Mã phòng (lấy từ Admin)
+              Mã phòng
             </label>
             <input
               type="text"
