@@ -63,6 +63,7 @@ const Footer = () => {
               <p><strong>Mã môn:</strong> MLN131</p>
               <p><strong>Chủ đề:</strong> Công nhân 4.0 - Thách thức và Cơ hội</p>
               <p><strong>Học kỳ:</strong> Spring 2026</p>
+              <p><strong>Giảng viên:</strong> LamTD8</p>
             </div>
           </div>
         </div>

@@ -469,7 +469,7 @@ const FillBlankGame = ({ onBack }) => {
 }
 
 // ==========================================
-// Game 2: Sắp xếp Timeline
+// Game 2: Sắp xếp Timeline (Drag & Drop)
 // ==========================================
 const TimelineGame = ({ onBack }) => {
   // Các sự kiện cần sắp xếp
@@ -495,26 +495,57 @@ const TimelineGame = ({ onBack }) => {
   }
 
   const [events, setEvents] = useState(() => shuffleArray(originalEvents))
-  const [selectedIndex, setSelectedIndex] = useState(null)
+  const [draggedIndex, setDraggedIndex] = useState(null)
+  const [dragOverIndex, setDragOverIndex] = useState(null)
   const [isChecked, setIsChecked] = useState(false)
   const [score, setScore] = useState(0)
 
-  const handleSelect = (index) => {
+  // Drag handlers
+  const handleDragStart = (e, index) => {
     if (isChecked) return
+    setDraggedIndex(index)
+    e.dataTransfer.effectAllowed = 'move'
+    // Thêm timeout để có hiệu ứng kéo đẹp hơn
+    setTimeout(() => {
+      e.target.style.opacity = '0.5'
+    }, 0)
+  }
 
-    if (selectedIndex === null) {
-      setSelectedIndex(index)
-    } else if (selectedIndex === index) {
-      setSelectedIndex(null)
-    } else {
-      // Swap items
-      const newEvents = [...events]
-      const temp = newEvents[selectedIndex]
-      newEvents[selectedIndex] = newEvents[index]
-      newEvents[index] = temp
-      setEvents(newEvents)
-      setSelectedIndex(null)
+  const handleDragEnd = (e) => {
+    e.target.style.opacity = '1'
+    setDraggedIndex(null)
+    setDragOverIndex(null)
+  }
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault()
+    if (isChecked || draggedIndex === null) return
+    setDragOverIndex(index)
+  }
+
+  const handleDragLeave = () => {
+    setDragOverIndex(null)
+  }
+
+  const handleDrop = (e, dropIndex) => {
+    e.preventDefault()
+    if (isChecked || draggedIndex === null || draggedIndex === dropIndex) {
+      setDragOverIndex(null)
+      return
     }
+
+    // Reorder: di chuyển item từ draggedIndex đến dropIndex
+    const newEvents = [...events]
+    const draggedItem = newEvents[draggedIndex]
+    
+    // Xóa item khỏi vị trí cũ
+    newEvents.splice(draggedIndex, 1)
+    // Chèn vào vị trí mới
+    newEvents.splice(dropIndex, 0, draggedItem)
+    
+    setEvents(newEvents)
+    setDraggedIndex(null)
+    setDragOverIndex(null)
   }
 
   const handleCheck = () => {
@@ -536,7 +567,8 @@ const TimelineGame = ({ onBack }) => {
 
   const handleRestart = () => {
     setEvents(shuffleArray(originalEvents))
-    setSelectedIndex(null)
+    setDraggedIndex(null)
+    setDragOverIndex(null)
     setIsChecked(false)
     setScore(0)
   }
@@ -569,44 +601,55 @@ const TimelineGame = ({ onBack }) => {
               Sắp xếp Timeline
             </h2>
             <p className="text-sm text-gray-500">
-              Click vào 2 sự kiện để hoán đổi vị trí
+              Kéo thả các sự kiện để sắp xếp theo thứ tự thời gian
             </p>
           </div>
         </div>
 
-        {/* Timeline */}
+        {/* Timeline - Drag & Drop */}
         <div className="space-y-3 mb-6">
           {events.map((event, index) => {
             const isCorrect = isChecked && event.order === index + 1
             const isWrong = isChecked && event.order !== index + 1
-            const isSelected = selectedIndex === index
+            const isDragging = draggedIndex === index
+            const isDragOver = dragOverIndex === index
 
             return (
               <motion.div
                 key={event.id}
                 layout
-                onClick={() => handleSelect(index)}
-                className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
-                  isSelected
-                    ? 'border-primary-500 bg-primary-50'
+                draggable={!isChecked}
+                onDragStart={(e) => handleDragStart(e, index)}
+                onDragEnd={handleDragEnd}
+                onDragOver={(e) => handleDragOver(e, index)}
+                onDragLeave={handleDragLeave}
+                onDrop={(e) => handleDrop(e, index)}
+                className={`p-4 rounded-lg border-2 transition-all select-none ${
+                  !isChecked ? 'cursor-grab active:cursor-grabbing' : ''
+                } ${
+                  isDragging
+                    ? 'border-primary-500 bg-primary-50 shadow-lg scale-[1.02]'
+                    : isDragOver
+                    ? 'border-primary-400 bg-primary-50/50 border-dashed'
                     : isCorrect
                     ? 'border-green-500 bg-green-50'
                     : isWrong
                     ? 'border-red-500 bg-red-50'
-                    : 'border-gray-200 hover:border-gray-300'
+                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                 }`}
               >
                 <div className="flex items-center">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 font-bold ${
+                  {/* Số thứ tự */}
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 font-bold transition-colors ${
                     isCorrect ? 'bg-green-500 text-white' :
                     isWrong ? 'bg-red-500 text-white' :
-                    isSelected ? 'bg-primary-500 text-white' :
+                    isDragging ? 'bg-primary-500 text-white' :
                     'bg-gray-200 text-gray-600'
                   }`}>
                     {index + 1}
                   </div>
                   <div className="flex-grow">
-                    <div className="flex items-center">
+                    <div className="flex items-center flex-wrap">
                       <HiClock className="w-4 h-4 text-gray-400 mr-2" />
                       {/* Chỉ hiện năm sau khi check để tăng độ khó */}
                       {isChecked && (
@@ -615,15 +658,20 @@ const TimelineGame = ({ onBack }) => {
                       <span className="text-gray-700">{event.event}</span>
                     </div>
                   </div>
-                  {isChecked && (
-                    <div className="ml-4">
-                      {isCorrect ? (
+                  {/* Drag indicator hoặc Result icon */}
+                  <div className="ml-4 flex-shrink-0">
+                    {isChecked ? (
+                      isCorrect ? (
                         <HiCheck className="w-6 h-6 text-green-500" />
                       ) : (
                         <HiX className="w-6 h-6 text-red-500" />
-                      )}
-                    </div>
-                  )}
+                      )
+                    ) : (
+                      <div className="w-6 h-6 flex flex-col justify-center items-center text-gray-400">
+                        <span className="text-lg">⋮⋮</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             )

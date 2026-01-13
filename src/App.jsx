@@ -19,6 +19,9 @@ import AdminPage from './pages/AdminPage'
 // Protected Route
 import ProtectedRoute from './components/common/ProtectedRoute'
 
+// AI Chatbox Component
+import AIChatbox from './components/common/AIChatbox'
+
 // Main App component - Component chính của ứng dụng
 function App() {
   return (
@@ -69,6 +72,9 @@ function App() {
             
             {/* Footer */}
             <Footer />
+            
+            {/* AI Chatbox - Trợ lý AI về CNXHKH */}
+            <AIChatbox />
           </div>
         </Router>
       </QuizProvider>

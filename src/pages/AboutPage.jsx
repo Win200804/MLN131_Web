@@ -100,11 +100,6 @@ const AboutPage = () => {
                 </strong> - một chủ đề mang tính thời sự cao, giúp sinh viên hiểu rõ 
                 vai trò và sứ mệnh của giai cấp công nhân trong bối cảnh hiện đại.
               </p>
-              <p className="text-gray-700 leading-relaxed">
-                Website được thiết kế theo 3 tiêu chí: <strong>Mới lạ</strong> (giao diện hiện đại, 
-                trải nghiệm người dùng tốt), <strong>Lợi ích</strong> (nội dung học thuật chính xác, 
-                có giá trị), và <strong>Tương tác</strong> (Quiz multiplayer, Mini games, AI chatbox).
-              </p>
             </div>
           </div>
         </motion.section>
@@ -136,98 +131,6 @@ const AboutPage = () => {
             ))}
           </div>
         </motion.section>
-
-        {/* Công nghệ */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <h2 className="section-title text-center">Công nghệ Sử dụng</h2>
-          <div className="max-w-3xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {technologies.map((tech, index) => (
-                <div key={index} className="bg-white p-4 rounded-xl shadow-sm text-center">
-                  <p className="font-bold text-primary-900">{tech.name}</p>
-                  <p className="text-sm text-gray-500">{tech.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Thông tin học phần */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <h2 className="section-title text-center">Thông tin Học phần</h2>
-          <div className="max-w-2xl mx-auto">
-            <div className="card bg-gradient-to-br from-red-50 to-orange-50 border-l-4 border-red-500">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-gray-500">Môn học</p>
-                  <p className="font-bold text-gray-900">Chủ nghĩa xã hội khoa học</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Mã môn</p>
-                  <p className="font-bold text-gray-900">MLN131</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Học kỳ</p>
-                  <p className="font-bold text-gray-900">Spring 2026</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Loại sản phẩm</p>
-                  <p className="font-bold text-gray-900">Sản phẩm sáng tạo</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* AI Chatbox Notice */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <div className="max-w-2xl mx-auto">
-            <div className="card bg-blue-50 border border-blue-200">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <HiChat className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-heading font-bold text-blue-900 mb-1">
-                    AI Chatbox - Đang phát triển
-                  </h3>
-                  <p className="text-blue-700 text-sm">
-                    Tính năng AI Chatbox sẽ được tích hợp trong phiên bản tiếp theo, 
-                    giúp bạn hỏi đáp và tìm hiểu sâu hơn về nội dung bài học.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-      </div>
-
-      {/* Footer CTA */}
-      <div className="bg-primary-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="flex items-center justify-center text-lg mb-4">
-            Made with <HiHeart className="w-5 h-5 mx-2 text-accent-red" /> for MLN131
-          </p>
-          <p className="text-white/60 text-sm max-w-2xl mx-auto">
-            Lưu ý: Nội dung website được biên soạn dựa trên giáo trình chính thức. 
-            Mọi hình ảnh và nội dung đều đảm bảo tính chính xác về chủ quyền quốc gia, 
-            với Việt Nam bao gồm hai quần đảo Hoàng Sa và Trường Sa.
-          </p>
-        </div>
       </div>
     </div>
   )
