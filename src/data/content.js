@@ -1,5 +1,5 @@
 // Content Data - Nội dung 3 phần bài giảng về Chủ nghĩa xã hội khoa học
-// CHÚ TRỌNG: Phần 2 - Thách thức và Cơ hội của Công dân 4.0
+// CHÚ TRỌNG: Phần 2 - Thách thức và Cơ hội của Công nhân 4.0
 
 const contentData = {
   // ========================================
@@ -176,11 +176,11 @@ const contentData = {
   },
 
   // ========================================
-  // PHẦN 2: THÁCH THỨC VÀ CƠ HỘI CỦA CÔNG DÂN 4.0 (CHÚ TRỌNG)
+  // PHẦN 2: THÁCH THỨC VÀ CƠ HỘI CỦA Công nhân 4.0 (CHÚ TRỌNG)
   // ========================================
   section2: {
     id: 'thach-thuc-co-hoi',
-    title: 'THÁCH THỨC và CƠ HỘI của Công dân 4.0',
+    title: 'THÁCH THỨC và CƠ HỘI của Công nhân 4.0',
     subtitle: 'Giai cấp công nhân trong kỷ nguyên Cách mạng Công nghiệp lần thứ Tư',
     icon: '🚀',
     color: 'orange',
@@ -229,7 +229,7 @@ const contentData = {
     
     // ========== THÁCH THỨC (QUAN TRỌNG) ==========
     challenges: {
-      title: '⚠️ THÁCH THỨC của Công dân 4.0',
+      title: '⚠️ THÁCH THỨC của Công nhân 4.0',
       subtitle: 'Những khó khăn cần vượt qua trong kỷ nguyên số',
       highlightColor: 'red',
       
@@ -309,7 +309,7 @@ const contentData = {
     
     // ========== CƠ HỘI (QUAN TRỌNG) ==========
     opportunities: {
-      title: '✨ CƠ HỘI của Công dân 4.0',
+      title: '✨ CƠ HỘI của Công nhân 4.0',
       subtitle: 'Tiềm năng phát triển trong kỷ nguyên mới',
       highlightColor: 'green',
       

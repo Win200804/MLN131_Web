@@ -52,7 +52,7 @@ const HomePage = () => {
     },
     {
       icon: HiUserGroup,
-      title: 'Công dân 4.0',
+      title: 'Công nhân 4.0',
       description: 'Thách thức và cơ hội trong kỷ nguyên số'
     },
     {
@@ -87,7 +87,7 @@ const HomePage = () => {
 
             {/* Main Title */}
             <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              Công dân <span className="text-accent-gold">4.0</span>
+              Công nhân <span className="text-accent-gold">4.0</span>
             </h1>
             
             {/* Subtitle */}

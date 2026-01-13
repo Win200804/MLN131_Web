@@ -17,7 +17,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <HiAcademicCap className="w-6 h-6 text-accent-gold" />
-              <h3 className="font-heading font-bold text-lg">Công dân 4.0</h3>
+              <h3 className="font-heading font-bold text-lg">Công nhân 4.0</h3>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
               Sản phẩm sáng tạo môn Chủ nghĩa xã hội khoa học.
@@ -61,7 +61,7 @@ const Footer = () => {
             <div className="space-y-2 text-sm text-gray-300">
               <p><strong>Môn học:</strong> Chủ nghĩa xã hội khoa học</p>
               <p><strong>Mã môn:</strong> MLN131</p>
-              <p><strong>Chủ đề:</strong> Công dân 4.0 - Thách thức và Cơ hội</p>
+              <p><strong>Chủ đề:</strong> Công nhân 4.0 - Thách thức và Cơ hội</p>
               <p><strong>Học kỳ:</strong> Spring 2026</p>
             </div>
           </div>

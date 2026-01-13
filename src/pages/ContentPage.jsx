@@ -1,5 +1,5 @@
 // ContentPage - Trang nội dung bài giảng
-// CHÚ TRỌNG: Phần 2 - Thách thức và Cơ hội của Công dân 4.0
+// CHÚ TRỌNG: Phần 2 - Thách thức và Cơ hội của Công nhân 4.0
 
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'

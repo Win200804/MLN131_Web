@@ -1,4 +1,4 @@
-# Công dân 4.0 - Thách thức và Cơ hội
+# Công nhân 4.0 - Thách thức và Cơ hội
 
 Website học tập tương tác về Chủ nghĩa xã hội khoa học, tập trung vào chủ đề "Giai cấp công nhân: Thách thức và Cơ hội trong kỷ nguyên Cách mạng Công nghiệp 4.0".
 
@@ -12,7 +12,7 @@ Website học tập tương tác về Chủ nghĩa xã hội khoa học, tập t
 
 1. **Nội dung Bài giảng** - 3 phần nội dung chính:
    - Quan điểm cơ bản của Chủ nghĩa Mác-Lênin
-   - **Thách thức và Cơ hội của Công dân 4.0** (Trọng tâm)
+   - **Thách thức và Cơ hội của Công nhân 4.0** (Trọng tâm)
    - Sứ mệnh lịch sử tại Việt Nam
 
 2. **Quiz Multiplayer** - Kiểu Kahoot

@@ -48,7 +48,7 @@ const Header = () => {
               <div className="flex-1 bg-accent-gold"></div>
             </div>
             <div>
-              <h1 className="font-heading font-bold text-xl tracking-tight">Công dân 4.0</h1>
+              <h1 className="font-heading font-bold text-xl tracking-tight">Công nhân 4.0</h1>
               <p className="text-xs text-gray-400 hidden sm:block">Thách thức & Cơ hội</p>
             </div>
           </Link>

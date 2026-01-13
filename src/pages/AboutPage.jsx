@@ -53,7 +53,7 @@ const AboutPage = () => {
             </div>
             
             <h1 className="font-heading text-4xl md:text-5xl font-bold mb-6">
-              Về dự án <span className="text-accent-gold">Công dân 4.0</span>
+              Về dự án <span className="text-accent-gold">Công nhân 4.0</span>
             </h1>
             
             <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8">
@@ -89,7 +89,7 @@ const AboutPage = () => {
           <div className="max-w-4xl mx-auto">
             <div className="card">
               <p className="text-gray-700 leading-relaxed mb-4">
-                <strong>Công dân 4.0</strong> là sản phẩm sáng tạo cho môn học 
+                <strong>Công nhân 4.0</strong> là sản phẩm sáng tạo cho môn học 
                 <strong> Chủ nghĩa xã hội khoa học (MLN131)</strong>. Dự án được xây dựng 
                 với mục tiêu giúp sinh viên tiếp cận nội dung học thuật một cách sinh động, 
                 tương tác và hiệu quả.

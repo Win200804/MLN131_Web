@@ -20,7 +20,7 @@ export const SECTION_IDS = {
 // Section titles - Tiêu đề các phần
 export const SECTION_TITLES = {
   [SECTION_IDS.SECTION_1]: 'Quan điểm cơ bản của Chủ nghĩa Mác-Lênin',
-  [SECTION_IDS.SECTION_2]: 'Thách thức và Cơ hội của Công dân 4.0',
+  [SECTION_IDS.SECTION_2]: 'Thách thức và Cơ hội của Công nhân 4.0',
   [SECTION_IDS.SECTION_3]: 'Sứ mệnh lịch sử tại Việt Nam'
 }
 
