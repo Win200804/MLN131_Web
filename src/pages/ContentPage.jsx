@@ -5,6 +5,29 @@ import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiChevronRight, HiChevronLeft, HiBookOpen, HiLightBulb, HiExclamation, HiCheck, HiStar, HiArrowRight } from 'react-icons/hi'
+
+// Hình ảnh minh họa cho các section (sử dụng Unsplash)
+const SECTION_IMAGES = {
+  // Section 1: Quan điểm Mác-Lênin
+  section1: {
+    hero: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80',
+    concept: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80',
+    mission: '/images/image.jpg'
+  },
+  // Section 2: Thách thức và Cơ hội (TRỌNG TÂM)
+  section2: {
+    hero: '/images/1.jpg',
+    challenges: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80',
+    opportunities: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80',
+    trends: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80'
+  },
+  // Section 3: Sứ mệnh Việt Nam
+  section3: {
+    hero: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800&q=80',
+    history: 'https://images.unsplash.com/photo-1570366583862-f91883984fde?w=600&q=80',
+    future: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80'
+  }
+}
 import contentData from '../data/content'
 
 const ContentPage = () => {
@@ -142,29 +165,45 @@ const ContentPage = () => {
   )
 }
 
+// Hình ảnh cho từng section trong overview
+const OVERVIEW_IMAGES = [
+  'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&q=80', // Quan điểm Mác-Lênin
+  '/images/1.jpg', // Thách thức Cơ hội 4.0 - Ảnh công nhân Việt Nam
+  'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&q=80'  // Sứ mệnh Việt Nam
+]
+
 // Content Overview - Hiển thị danh sách các phần
 const ContentOverview = ({ sections }) => {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-primary-900 to-secondary-500 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Hero Header với hình ảnh nền */}
+      <div className="relative bg-gradient-to-r from-primary-900 to-secondary-500 text-white py-20 overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <HiBookOpen className="w-16 h-16 mx-auto mb-4 text-accent-gold" />
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-full mb-6 backdrop-blur-sm">
+              <HiBookOpen className="w-10 h-10 text-accent-gold" />
+            </div>
             <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4">
               Nội dung Bài giảng
             </h1>
-            <p className="text-xl text-white/80 max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 max-w-2xl mx-auto">
               Chủ nghĩa xã hội khoa học - Giai cấp công nhân và Sứ mệnh lịch sử
             </p>
           </motion.div>
         </div>
       </div>
 
-      {/* Sections Grid */}
+      {/* Sections Grid với hình ảnh */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {sections.map((section, index) => (
@@ -175,25 +214,43 @@ const ContentOverview = ({ sections }) => {
               transition={{ delay: index * 0.2 }}
             >
               <Link to={`/content/${section.id}`}>
-                <div className={`card h-full hover:scale-105 transition-transform ${
+                <div className={`group bg-white rounded-2xl shadow-lg overflow-hidden h-full hover:shadow-xl transition-all duration-300 ${
                   section.data.highlight ? 'ring-2 ring-orange-500' : ''
                 }`}>
-                  {section.data.highlight && (
-                    <div className="absolute -top-3 left-4 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                      TRỌNG TÂM
+                  {/* Hình ảnh */}
+                  <div className="relative h-48 overflow-hidden bg-gray-900">
+                    <img 
+                      src={OVERVIEW_IMAGES[index]} 
+                      alt={section.data.title}
+                      className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    
+                    {/* Badge */}
+                    {section.data.highlight && (
+                      <div className="absolute top-4 left-4 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                        TRỌNG TÂM
+                      </div>
+                    )}
+                    
+                    {/* Phần số */}
+                    <div className="absolute top-4 right-4 bg-white/90 text-gray-800 px-3 py-1 rounded-full text-xs font-bold">
+                      Phần {index + 1}
                     </div>
-                  )}
-                  <div className="text-5xl mb-4">{section.data.icon}</div>
-                  <div className="text-sm text-gray-500 mb-2">Phần {index + 1}</div>
-                  <h3 className="font-heading text-xl font-bold text-gray-900 mb-3">
-                    {section.data.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    {section.data.subtitle}
-                  </p>
-                  <div className="flex items-center text-primary-900 font-medium">
-                    <span>Đọc chi tiết</span>
-                    <HiChevronRight className="w-5 h-5 ml-1" />
+                  </div>
+                  
+                  {/* Nội dung */}
+                  <div className="p-6">
+                    <h3 className="font-heading text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-900 transition-colors">
+                      {section.data.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                      {section.data.subtitle}
+                    </p>
+                    <div className="flex items-center text-primary-900 font-medium group-hover:translate-x-2 transition-transform">
+                      <span>Đọc chi tiết</span>
+                      <HiChevronRight className="w-5 h-5 ml-1" />
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -209,46 +266,53 @@ const ContentOverview = ({ sections }) => {
 const Section1Content = ({ data }) => {
   return (
     <div className="space-y-12">
-      {/* Khái niệm */}
-      <div>
-        <h2 className="section-title flex items-center">
-          <HiBookOpen className="w-8 h-8 mr-3 text-primary-900" />
-          {data.concept.title}
-        </h2>
-        <p className="text-lg text-gray-600 mb-8">{data.concept.description}</p>
+      {/* Hero Image cho Section 1 - Ảnh không bị che */}
+      <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-video bg-gray-900">
+        <img 
+          src={SECTION_IMAGES.section1.hero}
+          alt="Giai cấp công nhân"
+          className="w-full h-full object-contain"
+        />
+        {/* Overlay chỉ ở phần dưới */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+          <h2 className="font-heading text-xl md:text-2xl font-bold text-white mb-2 drop-shadow-lg">
+            {data.concept.title}
+          </h2>
+          <p className="text-white/90 text-sm md:text-base drop-shadow max-w-2xl">{data.concept.description}</p>
+        </div>
+      </div>
         
-        {/* Hai phương diện */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {data.concept.aspects.map((aspect) => (
-            <div key={aspect.id} className="card">
-              <div className="text-3xl mb-3">{aspect.icon}</div>
-              <h3 className="font-heading text-xl font-bold text-gray-900 mb-4">
-                {aspect.title}
-              </h3>
-              <ul className="space-y-2 mb-4">
-                {aspect.points.map((point, i) => (
-                  <li key={i} className="flex items-start">
-                    <HiCheck className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">{point}</span>
-                  </li>
-                ))}
-              </ul>
-              <blockquote className="italic text-sm text-gray-500 border-l-4 border-primary-500 pl-4">
-                {aspect.quote}
-              </blockquote>
-            </div>
-          ))}
-        </div>
+      {/* Hai phương diện */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {data.concept.aspects.map((aspect) => (
+          <div key={aspect.id} className="card hover:shadow-lg transition-shadow">
+            <div className="text-3xl mb-3">{aspect.icon}</div>
+            <h3 className="font-heading text-xl font-bold text-gray-900 mb-4">
+              {aspect.title}
+            </h3>
+            <ul className="space-y-2 mb-4">
+              {aspect.points.map((point, i) => (
+                <li key={i} className="flex items-start">
+                  <span className="w-2 h-2 bg-primary-500 rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                  <span className="text-gray-700">{point}</span>
+                </li>
+              ))}
+            </ul>
+            <blockquote className="italic text-sm text-gray-500 border-l-4 border-primary-500 pl-4 bg-gray-50 py-2 pr-2 rounded-r">
+              {aspect.quote}
+            </blockquote>
+          </div>
+        ))}
+      </div>
 
-        {/* Định nghĩa */}
-        <div className="bg-primary-50 border-l-4 border-primary-900 p-6 rounded-r-lg">
-          <h4 className="font-heading font-bold text-primary-900 mb-2">
-            {data.concept.definition.title}
-          </h4>
-          <p className="text-gray-700 leading-relaxed">
-            {data.concept.definition.content}
-          </p>
-        </div>
+      {/* Định nghĩa */}
+      <div className="bg-primary-50 border-l-4 border-primary-900 p-6 rounded-r-lg">
+        <h4 className="font-heading font-bold text-primary-900 mb-2">
+          {data.concept.definition.title}
+        </h4>
+        <p className="text-gray-700 leading-relaxed">
+          {data.concept.definition.content}
+        </p>
       </div>
 
       {/* Đặc điểm */}
@@ -267,10 +331,22 @@ const Section1Content = ({ data }) => {
         </div>
       </div>
 
-      {/* Nội dung sứ mệnh lịch sử */}
+      {/* Nội dung sứ mệnh lịch sử - Ảnh không bị che */}
       <div>
-        <h2 className="section-title">{data.mission.title}</h2>
-        <p className="text-lg text-gray-600 mb-8">{data.mission.overview}</p>
+        <div className="relative rounded-2xl overflow-hidden mb-8 shadow-lg aspect-video bg-gray-900">
+          <img 
+            src={SECTION_IMAGES.section1.mission}
+            alt="Sứ mệnh lịch sử"
+            className="w-full h-full object-contain"
+          />
+          {/* Overlay chỉ ở phần dưới */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+            <h2 className="font-heading text-xl md:text-2xl font-bold text-white mb-2 drop-shadow-lg">
+              {data.mission.title}
+            </h2>
+            <p className="text-white/95 text-sm md:text-base max-w-2xl drop-shadow">{data.mission.overview}</p>
+          </div>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {data.mission.contents.map((content) => (
@@ -347,19 +423,29 @@ const Section2Content = ({ data }) => {
 
   return (
     <div className="space-y-12">
-      {/* Intro */}
-      <div className="card bg-gradient-to-r from-orange-50 to-yellow-50 border-l-4 border-orange-500">
-        <h2 className="font-heading text-2xl font-bold text-orange-900 mb-3">
-          {data.intro.title}
-        </h2>
-        <p className="text-gray-700 mb-4">{data.intro.description}</p>
-        <div className="flex flex-wrap gap-2">
-          {data.intro.features.map((feature, i) => (
-            <span key={i} className="bg-white px-3 py-1 rounded-full text-sm text-gray-700 border">
-              {feature}
-            </span>
-          ))}
+      {/* Hero Image - Ảnh không bị che */}
+      <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-video bg-gray-900">
+        <img 
+          src={SECTION_IMAGES.section2.hero}
+          alt="Cách mạng công nghiệp 4.0"
+          className="w-full h-full object-contain"
+        />
+        {/* Overlay chỉ ở phần dưới */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+          <h2 className="font-heading text-xl md:text-2xl font-bold text-white mb-2 drop-shadow-lg">
+            {data.intro.title}
+          </h2>
+          <p className="text-white/90 text-sm md:text-base drop-shadow max-w-2xl">{data.intro.description}</p>
         </div>
+      </div>
+
+      {/* Công nghệ 4.0 Tags */}
+      <div className="flex flex-wrap justify-center gap-3">
+        {data.intro.features.map((feature, i) => (
+          <span key={i} className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-md hover:shadow-lg transition-shadow">
+            {feature}
+          </span>
+        ))}
       </div>
 
       {/* Những điểm ổn định */}
@@ -420,11 +506,21 @@ const Section2Content = ({ data }) => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
             >
-              <h2 className="text-2xl font-bold text-red-700 mb-6 flex items-center">
-                <HiExclamation className="w-8 h-8 mr-2" />
-                {data.challenges.title}
-              </h2>
-              <p className="text-gray-600 mb-8">{data.challenges.subtitle}</p>
+              {/* Header với hình nền */}
+              <div className="relative rounded-2xl overflow-hidden mb-8 shadow-lg aspect-video bg-gray-900">
+                <img 
+                  src={SECTION_IMAGES.section2.challenges}
+                  alt="Thách thức công nghệ"
+                  className="w-full h-full object-contain"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-red-900/90 to-transparent p-4">
+                  <h2 className="text-xl md:text-2xl font-bold text-white mb-1 flex items-center drop-shadow-lg">
+                    <HiExclamation className="w-6 h-6 mr-2" />
+                    {data.challenges.title}
+                  </h2>
+                  <p className="text-white/95 text-sm drop-shadow">{data.challenges.subtitle}</p>
+                </div>
+              </div>
               <div className="space-y-6">
                 {data.challenges.items.map((item) => (
                   <div key={item.id} className="card border-l-4 border-red-500">
@@ -472,11 +568,21 @@ const Section2Content = ({ data }) => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
             >
-              <h2 className="text-2xl font-bold text-green-700 mb-6 flex items-center">
-                <HiLightBulb className="w-8 h-8 mr-2" />
-                {data.opportunities.title}
-              </h2>
-              <p className="text-gray-600 mb-8">{data.opportunities.subtitle}</p>
+              {/* Header với hình nền */}
+              <div className="relative rounded-2xl overflow-hidden mb-8 shadow-lg aspect-video bg-gray-900">
+                <img 
+                  src={SECTION_IMAGES.section2.opportunities}
+                  alt="Cơ hội phát triển"
+                  className="w-full h-full object-contain"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-green-900/90 to-transparent p-4">
+                  <h2 className="text-xl md:text-2xl font-bold text-white mb-1 flex items-center drop-shadow-lg">
+                    <HiLightBulb className="w-6 h-6 mr-2" />
+                    {data.opportunities.title}
+                  </h2>
+                  <p className="text-white/95 text-sm drop-shadow">{data.opportunities.subtitle}</p>
+                </div>
+              </div>
               <div className="space-y-6">
                 {data.opportunities.items.map((item) => (
                   <div key={item.id} className="card border-l-4 border-green-500">
@@ -501,7 +607,7 @@ const Section2Content = ({ data }) => {
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {item.benefits.map((benefit, i) => (
                           <li key={i} className="flex items-start text-sm text-gray-700">
-                            <HiCheck className="w-4 h-4 text-green-500 mr-2 mt-0.5" />
+                            <span className="w-2 h-2 bg-green-500 rounded-full mr-2 mt-1.5 flex-shrink-0"></span>
                             {benefit}
                           </li>
                         ))}
@@ -531,12 +637,27 @@ const Section2Content = ({ data }) => {
         </p>
       </div>
 
-      {/* Xu hướng biến đổi */}
+      {/* Xu hướng biến đổi với banner */}
       <div>
-        <h2 className="section-title">{data.trends.title}</h2>
+        <div className="relative rounded-2xl overflow-hidden mb-8 shadow-lg aspect-video bg-gray-900">
+          <img 
+            src={SECTION_IMAGES.section2.trends}
+            alt="Xu hướng biến đổi"
+            className="w-full h-full object-contain"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-indigo-900/90 to-transparent p-4">
+            <h2 className="font-heading text-xl md:text-2xl font-bold text-white mb-1 drop-shadow-lg">
+              {data.trends.title}
+            </h2>
+            <p className="text-white/95 text-sm drop-shadow">
+              Giai cấp công nhân đang trải qua những biến đổi sâu sắc về chất lượng, cơ cấu và vai trò trong xã hội hiện đại.
+            </p>
+          </div>
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {data.trends.items.map((item) => (
-            <div key={item.id} className="card">
+            <div key={item.id} className="card hover:shadow-lg transition-shadow">
               <div className="text-3xl mb-3">{item.icon}</div>
               <h3 className="font-heading font-bold text-gray-900 mb-3">{item.title}</h3>
               <p className="text-gray-600 text-sm mb-3">{item.description}</p>
@@ -549,7 +670,7 @@ const Section2Content = ({ data }) => {
               {item.examples && (
                 <div className="flex flex-wrap gap-1 mt-2">
                   {item.examples.map((ex, i) => (
-                    <span key={i} className="bg-gray-100 px-2 py-1 rounded text-xs">
+                    <span key={i} className="bg-primary-100 text-primary-800 px-2 py-1 rounded text-xs font-medium">
                       {ex}
                     </span>
                   ))}
@@ -567,20 +688,27 @@ const Section2Content = ({ data }) => {
 const Section3Content = ({ data }) => {
   return (
     <div className="space-y-12">
-      {/* Định nghĩa */}
-      <div className="card bg-red-50 border-l-4 border-red-600">
-        <p className="text-sm text-red-600 mb-2">{data.characteristics.definition.source}</p>
-        <blockquote className="text-lg text-gray-800 italic">
-          {data.characteristics.definition.content}
-        </blockquote>
+      {/* Hero Image cho Section 3 - Ảnh không bị che */}
+      <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-video bg-gray-900">
+        <img 
+          src={SECTION_IMAGES.section3.hero}
+          alt="Việt Nam công nghiệp hóa"
+          className="w-full h-full object-contain"
+        />
+        {/* Overlay chỉ ở phần dưới */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+          <p className="text-red-200 text-sm mb-2 drop-shadow">{data.characteristics.definition.source}</p>
+          <blockquote className="text-lg md:text-xl text-white font-medium italic drop-shadow-lg max-w-2xl">
+            "{data.characteristics.definition.content.substring(0, 150)}..."
+          </blockquote>
+        </div>
       </div>
 
-      {/* Đặc điểm lịch sử */}
+      {/* Đặc điểm lịch sử với banner */}
       <div>
-        <h2 className="section-title">{data.characteristics.historical.title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {data.characteristics.historical.items.map((item, i) => (
-            <div key={i} className="card flex items-start space-x-4">
+            <div key={i} className="card flex items-start space-x-4 hover:shadow-lg transition-shadow">
               <div className="text-3xl">{item.icon}</div>
               <div>
                 <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
@@ -591,12 +719,23 @@ const Section3Content = ({ data }) => {
         </div>
       </div>
 
-      {/* Biến đổi hiện đại */}
+      {/* Biến đổi hiện đại với banner */}
       <div>
-        <h2 className="section-title">{data.characteristics.modern.title}</h2>
+        <div className="relative rounded-2xl overflow-hidden mb-6 shadow-lg aspect-video bg-gray-900">
+          <img 
+            src={SECTION_IMAGES.section3.future}
+            alt="Tương lai giai cấp công nhân"
+            className="w-full h-full object-contain"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-purple-900/90 to-transparent p-4">
+            <h2 className="font-heading text-xl md:text-2xl font-bold text-white drop-shadow-lg">
+              {data.characteristics.modern.title}
+            </h2>
+          </div>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {data.characteristics.modern.items.map((item, i) => (
-            <div key={i} className="card flex items-start space-x-4">
+            <div key={i} className="card flex items-start space-x-4 hover:shadow-lg transition-shadow">
               <div className="text-3xl">{item.icon}</div>
               <div>
                 <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
@@ -631,7 +770,11 @@ const Section3Content = ({ data }) => {
               <ul className="space-y-2 mb-4">
                 {content.keyPoints.map((point, i) => (
                   <li key={i} className="flex items-start text-sm">
-                    <HiCheck className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span className={`w-2 h-2 rounded-full mr-2 mt-1.5 flex-shrink-0 ${
+                      content.color === 'green' ? 'bg-green-500' :
+                      content.color === 'red' ? 'bg-red-500' :
+                      'bg-purple-500'
+                    }`}></span>
                     <span className="text-gray-600">{point}</span>
                   </li>
                 ))}

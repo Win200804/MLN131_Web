@@ -9,7 +9,6 @@ const contentData = {
     id: 'quan-diem-co-ban',
     title: 'Quan điểm cơ bản của Chủ nghĩa Mác-Lênin về Giai cấp Công nhân',
     subtitle: 'Nền tảng lý luận về giai cấp công nhân và sứ mệnh lịch sử',
-    icon: '📚',
     color: 'blue',
     
     // Phần 1.1: Khái niệm giai cấp công nhân
@@ -182,7 +181,6 @@ const contentData = {
     id: 'thach-thuc-co-hoi',
     title: 'THÁCH THỨC và CƠ HỘI của Công nhân 4.0',
     subtitle: 'Giai cấp công nhân trong kỷ nguyên Cách mạng Công nghiệp lần thứ Tư',
-    icon: '🚀',
     color: 'orange',
     highlight: true, // Đánh dấu phần quan trọng
     
@@ -430,7 +428,6 @@ const contentData = {
     id: 'su-menh-viet-nam',
     title: 'Sứ mệnh Lịch sử của Giai cấp Công nhân Việt Nam',
     subtitle: 'Đặc điểm, nội dung và phương hướng xây dựng giai cấp công nhân Việt Nam hiện nay',
-    icon: '🇻🇳',
     color: 'red',
     
     // Đặc điểm giai cấp công nhân Việt Nam

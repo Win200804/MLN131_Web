@@ -13,7 +13,7 @@ const AboutPage = () => {
     {
       icon: HiLightBulb,
       title: 'Quiz Tương tác',
-      description: 'Hệ thống quiz multiplayer theo phong cách Kahoot, hỗ trợ tối đa 40 người chơi cùng lúc.'
+      description: 'Hệ thống quiz multiplayer, hỗ trợ tối đa 40 người chơi cùng lúc.'
     },
     {
       icon: HiCode,
@@ -23,7 +23,7 @@ const AboutPage = () => {
     {
       icon: HiChat,
       title: 'AI Chatbox',
-      description: 'Tính năng hỏi đáp AI (đang phát triển) giúp giải đáp thắc mắc về nội dung bài học.'
+      description: 'Tính năng hỏi đáp AI giúp giải đáp thắc mắc về nội dung bài học.'
     }
   ]
 

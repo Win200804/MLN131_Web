@@ -1,6 +1,6 @@
 // Footer Component - Chân trang
 import { Link } from 'react-router-dom'
-import { HiHeart, HiAcademicCap, HiBookOpen } from 'react-icons/hi'
+import { HiHeart, HiAcademicCap, HiBookOpen, HiInformationCircle } from 'react-icons/hi'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -57,7 +57,10 @@ const Footer = () => {
 
           {/* Thông tin học phần */}
           <div>
-            <h3 className="font-heading font-bold text-lg mb-4">Thông tin học phần</h3>
+            <h3 className="font-heading font-bold text-lg mb-4 flex items-center space-x-2">
+              <HiInformationCircle className="w-5 h-5 text-accent-gold" />
+              <span>Thông tin học phần</span>
+            </h3>
             <div className="space-y-2 text-sm text-gray-300">
               <p><strong>Môn học:</strong> Chủ nghĩa xã hội khoa học</p>
               <p><strong>Mã môn:</strong> MLN131</p>
